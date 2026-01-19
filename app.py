@@ -265,8 +265,7 @@ def create_ui():
     token_from_env = env_token is not None and len(env_token) > 0
     
     with gr.Blocks(
-        title="Audio Transcription with Speaker Diarization",
-        theme=gr.themes.Soft()
+        title="Audio Transcription with Speaker Diarization"
     ) as app:
         gr.Markdown(
             """
@@ -361,8 +360,7 @@ def create_ui():
                 output_text = gr.Textbox(
                     label="Transcript",
                     lines=25,
-                    max_lines=50,
-                    show_copy_button=True
+                    max_lines=50
                 )
                 
                 output_file = gr.File(
@@ -405,5 +403,6 @@ if __name__ == "__main__":
     app.launch(
         server_name="0.0.0.0",  # Allow external connections
         server_port=7860,
-        share=False  # Set to True if you want a public URL
+        share=False,  # Set to True if you want a public URL
+        theme=gr.themes.Soft()
     )
