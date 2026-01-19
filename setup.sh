@@ -64,9 +64,21 @@ else
     fi
 fi
 
-# Install dependencies using uv sync
+# Create virtual environment
 echo ""
-echo "Installing dependencies..."
+echo "Creating virtual environment..."
+uv venv --python 3.11
+echo -e "${GREEN}✓ Virtual environment created${NC}"
+
+# Install PyTorch CPU first (must be installed separately to avoid index conflicts)
+echo ""
+echo "Installing PyTorch (CPU version)..."
+uv pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+echo -e "${GREEN}✓ PyTorch installed${NC}"
+
+# Install remaining dependencies
+echo ""
+echo "Installing remaining dependencies..."
 echo "This may take a few minutes on first run..."
 uv sync --python 3.11
 echo -e "${GREEN}✓ Dependencies installed${NC}"
