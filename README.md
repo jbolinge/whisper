@@ -272,7 +272,9 @@ This project uses [uv](https://github.com/astral-sh/uv) for dependency managemen
 
 ## License
 
-This project uses:
+This project is licensed under the [GNU General Public License v3.0](LICENSE).
+
+Dependencies used:
 - [WhisperX](https://github.com/m-bain/whisperx) - BSD-4-Clause
 - [Gradio](https://github.com/gradio-app/gradio) - Apache-2.0
 - [pyannote-audio](https://github.com/pyannote/pyannote-audio) - MIT (models require license acceptance)
