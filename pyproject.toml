@@ -2,6 +2,9 @@
 name = "whisper-transcriber"
 version = "1.0.0"
 description = "WhisperX Audio Transcription with Speaker Diarization"
+authors = [
+    { name = "Jason Olinger", email = "whisper_transcriber@fastmail.com" }
+]
 readme = "README.md"
 license = "GPL-3.0-or-later"
 requires-python = ">=3.11"
