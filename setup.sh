@@ -1,6 +1,6 @@
 #!/bin/bash
 # WhisperX Transcription Server - Setup Script
-# This script automates the installation process using uv
+# Uses uv for fast, reliable dependency management
 
 set -e  # Exit on error
 
@@ -64,34 +64,11 @@ else
     fi
 fi
 
-# Create virtual environment with Python 3.11
+# Install dependencies using uv sync
 echo ""
-echo "Creating virtual environment with Python 3.11..."
-if [ -d ".venv" ]; then
-    echo -e "${YELLOW}! Virtual environment already exists. Removing old one...${NC}"
-    rm -rf .venv
-fi
-uv venv --python 3.11
-echo -e "${GREEN}✓ Virtual environment created${NC}"
-
-# Install PyTorch (CPU version)
-echo ""
-echo "Installing PyTorch (CPU version)..."
-echo "This may take a minute..."
-uv pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
-echo -e "${GREEN}✓ PyTorch installed${NC}"
-
-# Install WhisperX
-echo ""
-echo "Installing WhisperX..."
-echo "This may take a minute..."
-uv pip install git+https://github.com/m-bain/whisperx.git
-echo -e "${GREEN}✓ WhisperX installed${NC}"
-
-# Install Gradio and other dependencies
-echo ""
-echo "Installing Gradio and other dependencies..."
-uv pip install "gradio>=4.0.0" ffmpeg-python numpy pandas python-dotenv
+echo "Installing dependencies..."
+echo "This may take a few minutes on first run..."
+uv sync --python 3.11
 echo -e "${GREEN}✓ Dependencies installed${NC}"
 
 # Verify installation
@@ -112,10 +89,6 @@ echo "=================================================="
 echo ""
 echo "To start the server:"
 echo "  uv run python app.py"
-echo ""
-echo "Or activate the environment manually:"
-echo "  source .venv/bin/activate"
-echo "  python app.py"
 echo ""
 echo "Then open in browser: http://localhost:7860"
 echo ""

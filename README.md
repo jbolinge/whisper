@@ -95,17 +95,8 @@ mkdir whisper-transcriber
 cd whisper-transcriber
 # (copy all project files here)
 
-# Create virtual environment with Python 3.11
-uv venv --python 3.11
-
-# Install PyTorch CPU first (must use --index-url)
-uv pip install torch torchaudio --index-url https://download.pytorch.org/whl/cpu
-
-# Install WhisperX
-uv pip install git+https://github.com/m-bain/whisperx.git
-
-# Install remaining dependencies
-uv pip install "gradio>=4.0.0" ffmpeg-python numpy pandas
+# Install all dependencies (creates venv automatically)
+uv sync --python 3.11
 ```
 
 ### Verify Installation
@@ -119,12 +110,7 @@ uv run python -c "import whisperx; import gradio; print('Installation successful
 ### Starting the Server
 
 ```bash
-# Using uv run (recommended - no need to activate venv)
 uv run python app.py
-
-# Or activate the environment first
-source .venv/bin/activate
-python app.py
 ```
 
 The server will start at `http://0.0.0.0:7860`. Access it via:
@@ -237,8 +223,8 @@ uv run python app.py
 ## Troubleshooting
 
 ### "No module named 'whisperx'"
-- Ensure you're using `uv run python` or have activated the venv
-- Reinstall: `uv pip install git+https://github.com/m-bain/whisperx.git`
+- Ensure you're using `uv run python`
+- Reinstall dependencies: `uv sync`
 
 ### Diarization fails with authentication error
 - Verify HuggingFace token is correct
@@ -268,8 +254,8 @@ uv run python app.py
 ```
 whisper-transcriber/
 ├── app.py              # Main application
-├── requirements.txt    # Python dependencies
-├── README.md           # This file
+├── pyproject.toml      # Project config and dependencies
+├── uv.lock             # Locked dependency versions (generated)
 ├── setup.sh            # Automated setup script
 ├── .env.example        # Template for environment variables
 ├── .env                # Your local config (create from .env.example)
@@ -278,11 +264,11 @@ whisper-transcriber/
 
 ## Why uv?
 
-This project uses [uv](https://github.com/astral-sh/uv) instead of pip because:
+This project uses [uv](https://github.com/astral-sh/uv) for dependency management:
 - **10-100x faster** package installation
 - **Automatic Python version management** (downloads Python 3.11 if needed)
-- **Better dependency resolution**
-- **Drop-in replacement** for pip commands
+- **Lockfile support** for reproducible builds (`uv.lock`)
+- **Single command setup** with `uv sync`
 
 ## License
 
