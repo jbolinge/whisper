@@ -20,8 +20,18 @@ dependencies = [
 ]
 
 [tool.uv]
-extra-index-url = ["https://download.pytorch.org/whl/cpu"]
 index-strategy = "unsafe-first-match"
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+default = true
 
 [tool.uv.sources]
 whisperx = { git = "https://github.com/m-bain/whisperx.git" }
+torch = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }
