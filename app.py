@@ -143,6 +143,9 @@ def transcribe_audio(
     effective_token = hf_token.strip() if hf_token and hf_token.strip() else env_token
     
     # Set thread count for CPU inference
+    # OMP_NUM_THREADS controls CTranslate2 (used by faster-whisper/WhisperX)
+    # torch.set_num_threads controls PyTorch operations (alignment, diarization)
+    os.environ["OMP_NUM_THREADS"] = str(num_threads)
     torch.set_num_threads(num_threads)
     
     device, compute_type = get_device_and_compute_type()
