@@ -24,3 +24,7 @@ Thumbs.db
 
 # Temporary transcription outputs
 *.transcript.txt
+
+# MCP json files
+*.mcp.json
+.mcp.json
