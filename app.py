@@ -15,6 +15,11 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# Fix PyTorch 2.6+ compatibility: torch.load() now defaults to weights_only=True,
+# which breaks loading WhisperX/pyannote models that contain custom serialized objects.
+# This env var restores the previous behavior. See: https://github.com/m-bain/whisperX/issues/1304
+os.environ.setdefault("TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD", "1")
+
 # These imports will be available after installing requirements
 import whisperx
 import torch
