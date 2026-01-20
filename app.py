@@ -22,6 +22,7 @@ os.environ.setdefault("TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD", "1")
 
 # These imports will be available after installing requirements
 import whisperx
+from whisperx.diarize import DiarizationPipeline
 import torch
 
 
@@ -211,7 +212,7 @@ def transcribe_audio(
         progress(0.65, desc=f"Performing speaker diarization (token from {token_source})...")
         
         try:
-            diarize_model = whisperx.DiarizationPipeline(
+            diarize_model = DiarizationPipeline(
                 use_auth_token=effective_token,
                 device=device
             )
