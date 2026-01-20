@@ -231,19 +231,22 @@ def transcribe_audio(
                 torch.cuda.empty_cache()
                 
         except Exception as e:
-            progress(0.65, desc=f"Diarization failed: {str(e)}, continuing without speaker labels...")
-    
+            diarization_error = str(e)
+            progress(0.65, desc=f"Diarization failed: {diarization_error}, continuing without speaker labels...")
+
     progress(0.90, desc="Formatting output...")
-    
+
     # Format the transcript
     segments = result.get("segments", [])
-    
+
     if diarization_success:
         transcript = format_transcript_with_speakers(segments)
     else:
         transcript = format_transcript_simple(segments)
         if not effective_token:
             transcript = "NOTE: No HuggingFace token provided (neither in UI nor .env file) - speaker diarization disabled.\n\n" + transcript
+        elif 'diarization_error' in locals():
+            transcript = f"NOTE: Speaker diarization failed: {diarization_error}\n\n" + transcript
     
     # Save to file
     progress(0.95, desc="Saving transcript...")
