@@ -283,7 +283,7 @@ def create_ui():
             """
             # 🎙️ Audio Transcription with Speaker Diarization
             
-            Upload a `.wav` audio file to transcribe it with automatic speaker identification.
+            Upload an audio file (MP3, WAV, FLAC, OGG, M4A, etc.) to transcribe it with automatic speaker identification.
             
             **Features:**
             - Transcription using WhisperX (optimized for long-form audio)
